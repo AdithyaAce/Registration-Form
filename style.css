@@ -1,81 +1,223 @@
-@import url('https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=DM+Sans:wght@300;400;500&display=swap');
 
-* {
+:root {
+    --bg: #0d0d0f;
+    --surface: #141417;
+    --border: #2a2a30;
+    --border-focus: #c8a96e;
+    --accent: #c8a96e;
+    --accent-dark: #a8893e;
+    --text: #f0ede8;
+    --text-muted: #7a7875;
+    --error-bg: #1f1215;
+    --error-border: #7a2535;
+    --error-text: #e07080;
+    --success-bg: #0f1f15;
+    --success-border: #2a6040;
+    --success-text: #60c080;
+    --radius: 6px;
+    --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-    outline: none;
-    font-family: 'Josefin Sans', sans-serif;
 }
 
 body {
-    background-color: rgb(105, 228, 218);
+    background-color: var(--bg);
+    background-image:
+        radial-gradient(ellipse 60% 50% at 30% 20%, rgba(200, 169, 110, 0.06) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 40% at 75% 80%, rgba(200, 169, 110, 0.04) 0%, transparent 60%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    color: var(--text);
+    padding: 2rem;
 }
 
 .wrapper {
+    width: 100%;
+    max-width: 420px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 48px 40px 44px;
+    position: relative;
+    animation: fadeUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) both;
+    box-shadow:
+        0 0 0 1px rgba(255, 255, 255, 0.03),
+        0 20px 60px rgba(0, 0, 0, 0.6),
+        0 1px 0 rgba(200, 169, 110, 0.12) inset;
+}
+
+.wrapper::before {
+    content: '';
     position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    max-width: 350px;
-    width: 100%;
-    background-color: papayawhip;
-    padding: 25px;
-    border-radius: 15%;
-    box-sizing: 4px 4px 2px rgba(254, 236, 164, 1);
+    top: 0;
+    left: 40px;
+    right: 40px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    opacity: 0.5;
+    border-radius: 0 0 50% 50%;
 }
 
-.wrapper h2 {
-    text-align: center;
-    margin-bottom: 20px;
-    letter-spacing: 3px;
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-.wrapper .input_field {
-    margin-bottom: 10px;
+#hid {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.75rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    margin-bottom: 32px;
+    line-height: 1.2;
 }
 
-.wrapper .input_field input[type="text"],
-.wrapper .input_field input[type="password"] {
-    width: 100%;
-    padding: 10px;
+#hid::after {
+    content: '.';
+    color: var(--accent);
 }
 
-.wrapper input[type="submit"] {
-    border: 0px;
-    margin-top: 15px;
-    padding: 10px;
-    width: 100%;
-    background: #fece0c;
-    color: #332902;
-    text-transform: uppercase;
-    font-weight: 1000;
-    border-radius: 25px;
-    cursor: pointer;
-}
-
-.wrapper #error_message {
-    margin-bottom: 20px;
-    padding: 0px;
-    background: #fe8b8e;
-    text-align: center;
-    font-size: 14px;
-    transition: all 0.5s ease;
-}
-
-#success {
+/* ─── Success Message ─── */
+.suc {
     display: none;
+    background: var(--success-bg);
+    border: 1px solid var(--success-border);
+    border-radius: var(--radius);
+    padding: 14px 18px;
+    margin-bottom: 20px;
 }
 
-.creds {
-    background-color: #FFD151;
+.suc h2 {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--success-text);
+    letter-spacing: 0.01em;
+}
+
+/* ─── Error Message ─── */
+#error_message {
+    font-size: 0.8rem;
+    color: var(--error-text);
+    background: var(--error-bg);
+    border: 1px solid var(--error-border);
+    border-radius: var(--radius);
+    padding: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: all var(--transition);
+    margin-bottom: 0;
+}
+
+#error_message:not(:empty) {
+    padding: 12px 16px;
+    max-height: 80px;
+    margin-bottom: 18px;
+}
+
+/* ─── Input Fields ─── */
+.input_field {
+    margin-bottom: 14px;
+    position: relative;
+}
+
+.input_field input {
     width: 100%;
-    height: 30px;
-    text-align: center;
-    padding: 10px;
+    padding: 13px 16px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 300;
+    letter-spacing: 0.01em;
+    outline: none;
+    transition: border-color var(--transition), background var(--transition), box-shadow var(--transition);
+    -webkit-appearance: none;
+}
+
+.input_field input::placeholder {
+    color: var(--text-muted);
+    font-weight: 300;
+}
+
+.input_field input:hover {
+    border-color: #3a3a42;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.input_field input:focus {
+    border-color: var(--border-focus);
+    background: rgba(200, 169, 110, 0.04);
+    box-shadow: 0 0 0 3px rgba(200, 169, 110, 0.1);
+}
+
+.input_field input[type="password"] {
+    letter-spacing: 0.1em;
+}
+
+.input_field input[type="password"]::placeholder {
+    letter-spacing: 0.01em;
+}
+
+/* ─── Submit Button ─── */
+input[type="submit"] {
+    width: 100%;
+    margin-top: 8px;
+    padding: 14px;
+    background: var(--accent);
+    border: none;
+    border-radius: var(--radius);
+    color: #0d0d0f;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
+    cursor: pointer;
+    transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+    box-shadow: 0 4px 20px rgba(200, 169, 110, 0.25);
+}
+
+input[type="submit"]:hover {
+    background: #d4b87a;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 24px rgba(200, 169, 110, 0.35);
+}
+
+input[type="submit"]:active {
+    transform: translateY(0);
+    background: var(--accent-dark);
+    box-shadow: 0 2px 10px rgba(200, 169, 110, 0.2);
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 480px) {
+    .wrapper {
+        padding: 36px 24px 32px;
+    }
+
+    #hid {
+        font-size: 1.5rem;
+    }
 }
