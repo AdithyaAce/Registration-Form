@@ -5,13 +5,13 @@
     --grad-2: #764ba2;
     --grad-3: #f093fb;
     --grad-4: #f5576c;
-    --accent: #ff6b6b;
+    --accent: #921e1e;
     --accent-2: #feca57;
     --accent-3: #48dbfb;
     --surface: rgba(255, 255, 255, 0.12);
     --surface-hover: rgba(255, 255, 255, 0.18);
     --surface-focus: rgba(255, 255, 255, 0.22);
-    --text: #ffffff;
+    --text: #d2c7c7;
     --text-muted: rgba(255, 255, 255, 0.55);
     --radius: 14px;
     --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
